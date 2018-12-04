@@ -4,7 +4,7 @@
   "description": "Project Client-side",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nodemon --exec mocha"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,10 @@
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
     "express": "^4.16.4",
+    "isemail": "^3.2.0",
     "jwt-simple": "^0.5.5",
     "mocha": "^5.2.0",
+    "moment": "^2.22.2",
     "mongoose": "^5.3.14",
     "neo4j-driver": "^1.7.2",
     "nodemon": "^1.18.7"
