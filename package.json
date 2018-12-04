@@ -1,0 +1,29 @@
+{
+  "name": "chatbox-api",
+  "version": "1.0.0",
+  "description": "Project Client-side",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KNZegelaar/chatbox-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KNZegelaar/chatbox-api/issues"
+  },
+  "homepage": "https://github.com/KNZegelaar/chatbox-api#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "express": "^4.16.4",
+    "jwt-simple": "^0.5.5",
+    "mocha": "^5.2.0",
+    "mongoose": "^5.3.14",
+    "neo4j-driver": "^1.7.2",
+    "nodemon": "^1.18.7"
+  }
+}
