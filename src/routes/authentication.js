@@ -11,19 +11,17 @@ router.all(new RegExp("^(?!\/login$|\/register$).*"), (request, response, next) 
         if (error) {
             response.status((error.status || 401)).json(apiErrors.notAuthorised)
         } else {
-            request.user = {
-                username: payload.sub
-            };
+            request.user = {username: payload.sub};
             next();
         }
     })
 });
 
-router.route("/register").post((request, response) => {
-    const registration = request.body;
+router.route("/register").post((req, res) => {
+    const registration = req.body;
     if (!CheckObjects.isValidRegistration(registration)) {
         const error = apiErrors.wrongRequestBodyProperties;
-        response.status(error.code).json(error);
+        res.status(error.code).json(error);
         return;
     }
 
@@ -32,7 +30,7 @@ router.route("/register").post((request, response) => {
     const email = registration.email;
     const password = registration.password;
 
-    repo.createUser(username, email, password, response);
+    repo.createUser(username, email, password, res);
 });
 
 router.route("/login").post((request, response) => {
@@ -66,7 +64,18 @@ router.route("/user/changepassword").post((request, response) => {
 });
 
 router.route("/user").delete((request, response) => {
-    repo.deleteUser(request.user.username, response);
+    const deleteObject = request.body;
+
+    if (!CheckObjects.isValidDelete(deleteObject)) {
+        const error = apiErrors.wrongRequestBodyProperties;
+        response.status(error.code).json(error);
+        return;
+    }
+
+    const password = deleteObject.password;
+
+
+    repo.deleteUser(request.user.username, password, response);
 });
 
 
@@ -98,6 +107,14 @@ class CheckObjects {
             object.password && typeof object.password == "string" &&
             object.newPassword && typeof object.newPassword == "string";
         console.log(`Is password change valid: ${tmp == undefined ? false : tmp}`);
+        return tmp == undefined ? false : tmp;
+    }
+
+    static isValidDelete(object) {
+        const tmp =
+            object && typeof object == "object" &&
+            object.password && typeof object.password == "string";
+        console.log(`Is account delete valid: ${tmp == undefined ? false : tmp}`);
         return tmp == undefined ? false : tmp;
     }
 }
