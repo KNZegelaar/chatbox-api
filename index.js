@@ -9,8 +9,6 @@ mongoose.connect('mongodb://localhost/' + config.dbName, {useNewUrlParser: true}
 
 mongoose.connection
     .once('open', () => {
-        console.log('Message:', 'The ' + config.dbName + ' database is connected');
-
         const port = config.serverPort;
 
         app.listen(port, function(){
@@ -26,7 +24,6 @@ app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 
 app.all('*', function(req, res, next){
-    console.log( req.method + " " + req.url);
     next();
 });
 

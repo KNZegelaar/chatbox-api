@@ -4,5 +4,6 @@
   "dbServer": "localhost",
   "serverPort": "27018",
   "neo4jUser": "neo4j",
-  "neo4jPassword": "Chatbox-2018"
+  "neo4jPassword": "Chatbox-2018",
+  "neo4jPort": "7687"
 }

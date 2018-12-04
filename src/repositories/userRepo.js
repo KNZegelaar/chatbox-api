@@ -1,9 +1,9 @@
 const auth = require('../authentication/authentication');
 const User = require('../schemas/userSchema');
 const ApiErrors = require('../errorMessages/apiErrors');
-const neo4j = require('neo4j-driver').v1;
 const config = require('../../config');
-const driver = neo4j.driver('bolt://localhost:7687/', neo4j.auth.basic(config.neo4jUser, config.neo4jPassword));
+const neo4j = require('neo4j-driver').v1;
+const driver = neo4j.driver('bolt://localhost:'+ config.neo4jPort + '/', neo4j.auth.basic(config.neo4jUser, config.neo4jPassword));
 
 module.exports = class UserRepository {
     static createUser(username, email, password, response) {
