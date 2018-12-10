@@ -18,61 +18,61 @@ router.all(new RegExp("^(?!\/login$|\/register$).*"), (request, response, next) 
 });
 
 router.route("/register").post((req, res) => {
-    const registration = req.body;
-    if (!CheckObjects.isValidRegistration(registration)) {
+    const body = req.body;
+    if (!CheckObjects.isValidRegistration(body)) {
         const error = apiErrors.wrongRequestBodyProperties;
         res.status(error.code).json(error);
         return;
     }
 
     // Get the users information to store in the database.
-    const username = registration.username;
-    const email = registration.email;
-    const password = registration.password;
+    const username = body.username;
+    const email = body.email;
+    const password = body.password;
 
     repo.createUser(username, email, password, res);
 });
 
 router.route("/login").post((request, response) => {
-    const loginObject = request.body;
-    if (!CheckObjects.isValidLogin(loginObject)) {
+    const body = request.body;
+    if (!CheckObjects.isValidLogin(body)) {
         const error = apiErrors.wrongRequestBodyProperties;
         response.status(error.code).json(error);
         return;
     }
     // Get the username and password from the request.
-    const username = loginObject.username;
-    const password = loginObject.password;
+    const username = body.username;
+    const password = body.password;
 
     repo.login(username, password, response);
 });
 
 router.route("/user/changepassword").post((request, response) => {
-    const changepasswordObject = request.body;
+    const body = request.body;
 
-    if (!CheckObjects.isValidPasswordChange(changepasswordObject)) {
+    if (!CheckObjects.isValidPasswordChange(body)) {
         const error = apiErrors.wrongRequestBodyProperties;
         response.status(error.code).json(error);
         return;
     }
 
-    const password = changepasswordObject.password;
-    const newPassword = changepasswordObject.newPassword;
+    const password = body.password;
+    const newPassword = body.newPassword;
 
     repo.changePassword(request.user.username, password, newPassword, response);
 
 });
 
 router.route("/user").delete((request, response) => {
-    const deleteObject = request.body;
+    const body = request.body;
 
-    if (!CheckObjects.isValidDelete(deleteObject)) {
+    if (!CheckObjects.isValidDelete(body)) {
         const error = apiErrors.wrongRequestBodyProperties;
         response.status(error.code).json(error);
         return;
     }
 
-    const password = deleteObject.password;
+    const password = body.password;
 
 
     repo.deleteUser(request.user.username, password, response);

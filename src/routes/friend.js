@@ -4,29 +4,29 @@ const apiErrors = require("../errorMessages/apiErrors.js");
 const repo = require('../repositories/friendRepo');
 
 router.post('/', (req, res) => {
-    const newFriend = req.body;
+    const body = req.body;
 
-    if (!CheckObjects.isValidFriend(newFriend)) {
+    if (!CheckObjects.isValidFriend(body)) {
         const error = apiErrors.wrongRequestBodyProperties;
         res.status(error.code).json(error);
         return;
     }
 
-    const usernameFriend = newFriend.usernameFriend;
+    const usernameFriend = body.usernameFriend;
 
     repo.createFriendship(req.user.username, usernameFriend, res);
 });
 
 router.delete('/', (req, res) => {
-    const newFriend = req.body;
+    const body = req.body;
 
-    if (!CheckObjects.isValidFriend(newFriend)) {
+    if (!CheckObjects.isValidFriend(body)) {
         const error = apiErrors.wrongRequestBodyProperties;
         res.status(error.code).json(error);
         return;
     }
 
-    const usernameFriend = newFriend.usernameFriend;
+    const usernameFriend = body.usernameFriend;
 
     repo.deleteFriendShip(req.user.username, usernameFriend, res);
 });
