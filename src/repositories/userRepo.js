@@ -5,8 +5,8 @@ const config = require('../../config');
 const neo4j = require('neo4j-driver').v1;
 const driver = neo4j.driver('bolt://localhost:'+ config.neo4jPort + '/', neo4j.auth.basic(config.neo4jUser, config.neo4jPassword));
 
-module.exports = class UserRepository {
-    static createUser(username, email, password, response) {
+class UserRepository {
+    static createUser(username, email, password, res) {
         const newUser = new User({ username: username, email: email, password: password });
 
         User.findOne({username})
@@ -24,50 +24,47 @@ module.exports = class UserRepository {
                                     session.close();
 
                                     //user has been created in mongoDB and neo4j
-                                    response.status(200).json({token: auth.encodeToken(username)});
+                                    res.status(200).json({token: auth.encodeToken(username)});
                                 })
                                 .catch(function (error) {
-                                    UserRepository.deleteUser(username, response);
-                                    response.status(500).json(ApiErrors.internalServerError());
+                                    UserRepository.deleteUser(username, res);
+                                    res.status(500).json(ApiErrors.internalServerError());
                                     console.log(error);
                                 });
                         })
-                        .catch(() => response.status(500).json(ApiErrors.internalServerError()))
-                } else response.status(420).json(ApiErrors.userExists());
+                        .catch(() => res.status(500).json(ApiErrors.internalServerError()))
+                } else res.status(420).json(ApiErrors.userExists());
             })
-            .catch(() => response.status(500).json(ApiErrors.internalServerError())
+            .catch(() => {res.status(500).json(ApiErrors.internalServerError())}
             );
     };
 
-    static login(username, password, response) {
+    static login(username, password, res) {
         User.findOne({username})
             .then((user) => {
-                if(user.password === password) response.status(200).json({token: auth.encodeToken(username)});
-                else response.status(401).json(ApiErrors.notAuthorised());
+                if(user.password === password) res.status(200).json({token: auth.encodeToken(username)});
+                else res.status(401).json(ApiErrors.notAuthorised());
             })
-            .catch(() => response.status(401).json(ApiErrors.notAuthorised()));
+            .catch(() => {res.status(401).json(ApiErrors.notAuthorised())});
 
     };
 
-    static changePassword(username, password, newPassword, response) {
+    static changePassword(username, password, newPassword, res) {
         User.findOne({username})
             .then((user) => {
                 console.log("User: " + user);
                 if(user.password === password){
                     user.set({password: newPassword});
                     user.save()
-                        .then(() => {
-                            response.status(200).json({message: "your password has been changed."});
-                        })
-                        .catch(() => response.status(500).json(ApiErrors.internalServerError()))
-
-                } else response.status(401).json(ApiErrors.notAuthorised());
+                        .then(() => res.status(200).json({message: "your password has been changed."}))
+                        .catch(() => res.status(500).json(ApiErrors.internalServerError()))
+                } else res.status(401).json(ApiErrors.notAuthorised());
             })
-            .catch(() => response.status(404).json(ApiErrors.notFound(username)));
+            .catch(() => {res.status(404).json(ApiErrors.notFound(username))});
     };
 
-    static deleteUser(username, response){
-        User.findOneAndDelete({username})
+    static deleteUser(username, password, res){
+        User.findOneAndDelete({username, password})
             .then(() => {
                 const session = driver.session();
 
@@ -77,10 +74,12 @@ module.exports = class UserRepository {
                         result.records.forEach(function (record) {});
                         session.close();
 
-                        response.status(200).json({message: "the user has been deleted."});
+                        res.status(200).json({message: "the user has been deleted."});
                     })
-                    .catch(() => response.status(500).json(ApiErrors.internalServerError()));
+                    .catch(() => res.status(500).json(ApiErrors.internalServerError()));
             })
-            .catch(() => response.status(500).json(ApiErrors.internalServerError()));
+            .catch(() => {res.status(401).json(ApiErrors.notAuthorised())});
     };
-};
+}
+
+module.exports = UserRepository;

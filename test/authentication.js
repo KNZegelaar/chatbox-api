@@ -11,12 +11,15 @@ chai.should();
 chai.use(chaiHttp);
 
 describe('Registration', () => {
-    let token = '';
+    let token = null;
 
     afterEach((done) => {
         chai.request(index)
             .delete('/api/user')
             .set('X-Access-Token', token)
+            .send({
+                password: "Password123!"
+            })
             .end((err, res) => {
                 if (err) console.log("Error: " + err);
                 done();
@@ -80,10 +83,6 @@ describe('Registration', () => {
             .end((err, res) => {
                 token = res.body.token;
 
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.should.have.property('token');
-
                 //find the user in the database
                 User.findOne({username: "Joe"})
                     .then((user) => {
@@ -105,10 +104,6 @@ describe('Registration', () => {
             })
             .end((err, res) => {
                 token = res.body.token;
-
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.should.have.property('token');
 
                 //find the user in the database
                 const session = driver.session();
@@ -148,6 +143,9 @@ describe('Login', () => {
         chai.request(index)
             .delete('/api/user')
             .set('X-Access-Token', token)
+            .send({
+                password: "Password123!"
+            })
             .end((err, res) => {
                 if (err) console.log("Error: " + err);
                 done();
