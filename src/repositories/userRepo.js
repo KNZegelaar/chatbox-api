@@ -14,23 +14,7 @@ class UserRepository {
                 if (user === null) {
                     newUser.save()
                         .then(() => {
-                            //create user in neo4j database
-                            const session = driver.session();
-                            session
-                                .run( `CREATE (a:User {username: '${newUser.username}'})`)
-                                .then(function (result) {
-                                    // result.records.forEach(function (record) {
-                                    // });
-                                    session.close();
-
-                                    //user has been created in mongoDB and neo4j
-                                    res.status(200).json({token: auth.encodeToken(username)});
-                                })
-                                .catch(function (error) {
-                                    UserRepository.deleteUser(username, res);
-                                    res.status(500).json(ApiErrors.internalServerError());
-                                    console.log(error);
-                                });
+                            res.status(200).json({token: auth.encodeToken(username)});
                         })
                         .catch(() => res.status(500).json(ApiErrors.internalServerError()))
                 } else res.status(420).json(ApiErrors.userExists());

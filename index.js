@@ -38,7 +38,6 @@ app.use(express.static(__dirname + '/public'));
 
 // Routing
 app.use('/api', require('./src/routes/authentication'));
-app.use('/api/friend', require('./src/routes/friend'));
 app.use('/api/chat', require('./src/routes/chat'));
 app.use('/api/message', require('./src/routes/message'));
 
