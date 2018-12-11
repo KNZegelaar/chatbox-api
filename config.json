@@ -1,6 +1,8 @@
 {
   "secretKey": "ProjectClientside-102586BK-",
   "dbName": "Chatbox",
+  "dbUser": "Admin",
+  "dbPassword": "Admin123!",
   "dbServer": "localhost",
   "serverPort": "27018",
   "neo4jUser": "neo4j",

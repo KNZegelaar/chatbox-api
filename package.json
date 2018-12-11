@@ -4,6 +4,7 @@
   "description": "Project Client-side",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "nodemon --exec mocha"
   },
   "repository": {
