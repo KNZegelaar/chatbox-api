@@ -2,8 +2,6 @@ const auth = require('../authentication/authentication');
 const User = require('../schemas/userSchema');
 const ApiErrors = require('../errorMessages/apiErrors');
 const config = require('../../config');
-const neo4j = require('neo4j-driver').v1;
-const driver = neo4j.driver('bolt://localhost:'+ config.neo4jPort + '/', neo4j.auth.basic(config.neo4jUser, config.neo4jPassword));
 
 class UserRepository {
     static createUser(username, email, password, res) {
@@ -50,17 +48,7 @@ class UserRepository {
     static deleteUser(username, password, res){
         User.findOneAndDelete({username, password})
             .then(() => {
-                const session = driver.session();
-
-                session
-                    .run('MATCH (a:User { username: "' + username + '"}) DETACH DELETE a')
-                    .then(function (result) {
-                        result.records.forEach(function (record) {});
-                        session.close();
-
-                        res.status(200).json({message: "the user has been deleted."});
-                    })
-                    .catch(() => res.status(500).json(ApiErrors.internalServerError()));
+                res.status(200).json({message: "the user has been deleted."});
             })
             .catch(() => {res.status(401).json(ApiErrors.notAuthorised())});
     };
