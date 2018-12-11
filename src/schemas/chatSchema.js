@@ -4,6 +4,7 @@ const MessageSchema = require('./messageSchema');
 
 const ChatSchema = new Schema({
     title: String,
+    description: String,
     creator: {
         type: Schema.Types.ObjectId,
         ref: 'user'
