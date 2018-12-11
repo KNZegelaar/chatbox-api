@@ -7,6 +7,12 @@ router.get('/all', (req, res) => {
     repo.findAllChats(res);
 });
 
+router.get('/:chatId', (req, res) => {
+    const chatId = req.params.chatId;
+
+    repo.findOneChat(chatId, res);
+});
+
 router.post('/', (req, res) => {
     const body = req.body;
 

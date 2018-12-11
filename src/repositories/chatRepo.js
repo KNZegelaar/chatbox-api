@@ -17,7 +17,15 @@ class ChatRepository {
 
     static findAllChats(res){
         Chat.find()
+            .populate('creator', 'username')
             .then((chats)=> res.status(200).json({chats: chats}))
+            .catch(() => res.status(500).json(ApiErrors.internalServerError()))
+    }
+
+    static findOneChat(_id, res){
+        Chat.findOne({_id})
+            .populate('creator', 'username')
+            .then((chat)=> res.status(200).json(chat))
             .catch(() => res.status(500).json(ApiErrors.internalServerError()))
     }
 }
