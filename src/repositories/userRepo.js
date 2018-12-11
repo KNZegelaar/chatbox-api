@@ -11,9 +11,7 @@ class UserRepository {
             .then((user) => {
                 if (user === null) {
                     newUser.save()
-                        .then(() => {
-                            res.status(200).json({token: auth.encodeToken(username)});
-                        })
+                        .then(() => res.status(200).json({token: auth.encodeToken(username)}))
                         .catch(() => res.status(500).json(ApiErrors.internalServerError()))
                 } else res.status(420).json(ApiErrors.userExists());
             })
