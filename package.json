@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Project Client-side",
   "main": "index.js",
+  "engines": {
+    "node":"10.x"
+  },
   "scripts": {
     "start": "node index.js",
     "test": "nodemon --exec mocha"
