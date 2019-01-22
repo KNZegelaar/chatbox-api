@@ -7,8 +7,14 @@ const MessageSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'user'
     },
+    chat: {
+        type: Schema.Types.ObjectId,
+        ref: 'chat'
+    },
     timeStamp: { type: Date, default: Date.now()},
     content: String
 });
 
-module.exports = MessageSchema;
+const Message = mongoose.model('message', MessageSchema);
+
+module.exports = Message;

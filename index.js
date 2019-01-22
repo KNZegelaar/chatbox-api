@@ -6,8 +6,6 @@ const config = require('./config.json');
 const cors = require('cors');
 const CONNECTION_STRING = 'mongodb+srv://'+ config.dbUser + ':' + config.dbPassword + '@cluster0-wessr.azure.mongodb.net/' + config.dbName +'?retryWrites=true';
 
-if(process)
-
 //Mongoose connection
 
     // mongodb+srv://Admin:<PASSWORD>@cluster0-wessr.azure.mongodb.net/test?retryWrites=true
