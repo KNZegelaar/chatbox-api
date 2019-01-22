@@ -7,6 +7,8 @@ const assert = require('assert');
 chai.should();
 chai.use(chaiHttp);
 
+//TODO: write tests for DELETE and UPDATE Chat
+
 describe('Chat', () => {
     let token = '';
 
@@ -39,6 +41,8 @@ describe('Chat', () => {
                 done();
             });
     });
+
+    //CREATE
 
     it('should create a new chat', (done) => {
         chai.request(index)
@@ -89,6 +93,7 @@ describe('Chat', () => {
             });
     });
 
+    //READ
 
     it('should return an error on GET request', (done)=> {
         chai.request(index)
@@ -113,4 +118,11 @@ describe('Chat', () => {
                 done();
             });
     });
+
+    //UPDATE
+
+    it('should update an chat', (done)=>{
+       done();
+    });
+
 });
