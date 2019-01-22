@@ -20,7 +20,12 @@ class MessageRepository {
                     .catch(() => res.status(404).json(ApiErrors.notFound("user")))
             })
     }
-}
 
+    //TODO: write READ
+
+    //TODO: write UPDATE
+
+    //TODO: write DELETE
+}
 
 module.exports = MessageRepository;

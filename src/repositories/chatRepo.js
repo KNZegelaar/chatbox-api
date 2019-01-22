@@ -28,6 +28,10 @@ class ChatRepository {
             .then((chat)=> res.status(200).json(chat))
             .catch(() => res.status(500).json(ApiErrors.internalServerError()))
     }
+
+    //TODO: UPDATE CHAT
+
+    //TODO: DELETE CHAT
 }
 
 module.exports = ChatRepository;

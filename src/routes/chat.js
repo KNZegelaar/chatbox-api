@@ -3,6 +3,8 @@ const router = express.Router();
 const apiErrors = require("../errorMessages/apiErrors.js");
 const repo = require('../repositories/chatRepo');
 
+
+//TODO: change '/all' into '/'
 router.get('/all', (req, res) => {
     repo.findAllChats(res);
 });
