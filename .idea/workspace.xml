@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3fda08f-e734-4476-9751-817c1d3990a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repositories/chatRepo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/repositories/chatRepo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repositories/messageRepo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/repositories/messageRepo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/chat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/chat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/schemas/messageSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/schemas/messageSchema.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -52,8 +47,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/schemas/messageSchema.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
+            <state relative-caret-position="102">
+              <caret line="6" column="36" lean-forward="true" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -108,6 +103,7 @@
         <option value="$PROJECT_DIR$/src/routes/message.js" />
         <option value="$PROJECT_DIR$/src/repositories/messageRepo.js" />
         <option value="$PROJECT_DIR$/test/chat.js" />
+        <option value="$PROJECT_DIR$/src/schemas/messageSchema.js" />
       </list>
     </option>
   </component>
@@ -201,12 +197,12 @@
       <updated>1544795949022</updated>
       <workItem from="1544795950407" duration="1718000" />
       <workItem from="1544815576119" duration="2312000" />
-      <workItem from="1548166503484" duration="392000" />
+      <workItem from="1548166503484" duration="890000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4422000" />
+    <option name="totallyTimeSpent" value="4920000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -306,8 +302,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/schemas/messageSchema.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
+        <state relative-caret-position="102">
+          <caret line="6" column="36" lean-forward="true" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
         </state>
       </provider>
     </entry>
