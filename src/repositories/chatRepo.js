@@ -1,6 +1,7 @@
 const ApiErrors = require('../errorMessages/apiErrors');
 const User = require('../schemas/userSchema');
 const Chat = require('../schemas/chatSchema');
+const Message = require('../schemas/messageSchema');
 
 class ChatRepository {
     static createChat(username, title, description, res){
@@ -29,9 +30,21 @@ class ChatRepository {
             .catch(() => res.status(500).json(ApiErrors.internalServerError()))
     }
 
-    //TODO: UPDATE CHAT
+    static updateChat(_id, title, description, res){
+        Chat.update({_id}, {title, description})
+            .then(() => res.status(200).json("The chat has successfully been updated"))
+            .catch(() => res.status(500).json(ApiErrors.internalServerError()));
+    }
 
-    //TODO: DELETE CHAT
+    static deleteChat(_id, res){
+        Message.remove({chat: _id})
+            .then(() => console.log("messages deleted for checkID: " + _id))
+            .catch(() => console.log("couldn't find any messages for checkId: " + _id));
+
+        Chat.findOneAndDelete({_id})
+            .then(() => res.status(200).json("The chat has successfully been deleted"))
+            .catch(() => res.status(500).json(ApiErrors.internalServerError()));
+    }
 }
 
 module.exports = ChatRepository;

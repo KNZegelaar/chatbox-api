@@ -5,7 +5,7 @@ const repo = require('../repositories/chatRepo');
 
 
 //TODO: change '/all' into '/'
-router.get('/all', (req, res) => {
+router.get('/', (req, res) => {
     repo.findAllChats(res);
 });
 
@@ -13,6 +13,29 @@ router.get('/:chatId', (req, res) => {
     const chatId = req.params.chatId;
 
     repo.findOneChat(chatId, res);
+});
+
+router.delete('/:chatId', (req, res) => {
+    const chatId = req.params.chatId;
+
+    repo.deleteChat(chatId, res);
+});
+
+router.put('/:chatId', (req, res) => {
+    const chatId = req.params.chatId;
+    const body = req.body;
+
+    if (!CheckObjects.isValidChat(body)) {
+        const error = apiErrors.wrongRequestBodyProperties;
+        res.status(error.code).json(error);
+        return;
+    }
+
+    const title = body.title;
+    const description = body.description;
+
+
+    repo.updateChat(chatId, title, description, res);
 });
 
 router.post('/', (req, res) => {
