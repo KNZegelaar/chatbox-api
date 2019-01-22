@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "Project Client-side",
   "main": "index.js",
+  "engines": {
+    "node": "8.11.3"
+  },
   "scripts": {
+    "start": "node index.js",
     "test": "nodemon --exec mocha"
   },
   "repository": {

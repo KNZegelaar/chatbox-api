@@ -4,16 +4,21 @@ const app = express();
 const bodyParser = require('body-parser');
 const config = require('./config.json');
 const cors = require('cors');
+const CONNECTION_STRING = 'mongodb+srv://'+ config.dbUser + ':' + config.dbPassword + '@cluster0-wessr.azure.mongodb.net/' + config.dbName +'?retryWrites=true';
+
+if(process)
 
 //Mongoose connection
-mongoose.connect('mongodb://localhost/' + config.dbName, {useNewUrlParser: true});
+
+    // mongodb+srv://Admin:<PASSWORD>@cluster0-wessr.azure.mongodb.net/test?retryWrites=true
+mongoose.connect(CONNECTION_STRING, {useNewUrlParser: true});
 
 mongoose.connection
     .once('open', () => {
-        const port = config.serverPort;
+        const port =  process.env.PORT || config.serverPort;
 
         app.listen(port, function(){
-            console.log('http://localhost: ' + port);
+            console.log('Running on port: ' + port);
         });
     })
     .on('error', (error) => {
@@ -33,6 +38,7 @@ app.use(express.static(__dirname + '/public'));
 
 // Routing
 app.use('/api', require('./src/routes/authentication'));
-app.use('/api/friend', require('./src/routes/friend'));
+app.use('/api/chat', require('./src/routes/chat'));
+app.use('/api/message', require('./src/routes/message'));
 
 module.exports = app;

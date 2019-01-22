@@ -3,15 +3,13 @@ const chaiHttp = require('chai-http');
 const index = require('../index');
 const User = require('../src/schemas/userSchema');
 const assert = require('assert');
-const config = require('../config');
-const neo4j = require('neo4j-driver').v1;
-const driver = neo4j.driver('bolt://localhost:'+ config.neo4jPort + '/', neo4j.auth.basic(config.neo4jUser, config.neo4jPassword));
+
 
 chai.should();
 chai.use(chaiHttp);
 
 describe('Registration', () => {
-    let token = null;
+    let token = '';
 
     afterEach((done) => {
         chai.request(index)
@@ -91,33 +89,6 @@ describe('Registration', () => {
                         assert(user.email === "JoeEmail@avans.com");
                         done();
                     });
-            });
-    });
-
-    it('should create a user in the neo4j database', (done) => {
-        chai.request(index)
-            .post('/api/register')
-            .send({
-                username: "Joe",
-                email: "JoeEmail@avans.com",
-                password: "Password123!"
-            })
-            .end((err, res) => {
-                token = res.body.token;
-
-                //find the user in the database
-                const session = driver.session();
-
-                //TODO: The method doesn't check if its really Joe
-                session
-                    .run('MATCH (a:User { username: "Joe"}) RETURN a')
-                    .then(function (result) {
-                        result.records.forEach(function (record) {
-                            record.should.be.a('object');
-                        });
-                        session.close();
-                        done();
-                    })
             });
     });
 });

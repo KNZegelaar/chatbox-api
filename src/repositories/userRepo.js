@@ -2,8 +2,6 @@ const auth = require('../authentication/authentication');
 const User = require('../schemas/userSchema');
 const ApiErrors = require('../errorMessages/apiErrors');
 const config = require('../../config');
-const neo4j = require('neo4j-driver').v1;
-const driver = neo4j.driver('bolt://localhost:'+ config.neo4jPort + '/', neo4j.auth.basic(config.neo4jUser, config.neo4jPassword));
 
 class UserRepository {
     static createUser(username, email, password, res) {
@@ -13,25 +11,7 @@ class UserRepository {
             .then((user) => {
                 if (user === null) {
                     newUser.save()
-                        .then(() => {
-                            //create user in neo4j database
-                            const session = driver.session();
-                            session
-                                .run( `CREATE (a:User {username: '${newUser.username}'})`)
-                                .then(function (result) {
-                                    // result.records.forEach(function (record) {
-                                    // });
-                                    session.close();
-
-                                    //user has been created in mongoDB and neo4j
-                                    res.status(200).json({token: auth.encodeToken(username)});
-                                })
-                                .catch(function (error) {
-                                    UserRepository.deleteUser(username, res);
-                                    res.status(500).json(ApiErrors.internalServerError());
-                                    console.log(error);
-                                });
-                        })
+                        .then(() => res.status(200).json({token: auth.encodeToken(username)}))
                         .catch(() => res.status(500).json(ApiErrors.internalServerError()))
                 } else res.status(420).json(ApiErrors.userExists());
             })
@@ -66,17 +46,7 @@ class UserRepository {
     static deleteUser(username, password, res){
         User.findOneAndDelete({username, password})
             .then(() => {
-                const session = driver.session();
-
-                session
-                    .run('MATCH (a:User { username: "' + username + '"}) DETACH DELETE a')
-                    .then(function (result) {
-                        result.records.forEach(function (record) {});
-                        session.close();
-
-                        res.status(200).json({message: "the user has been deleted."});
-                    })
-                    .catch(() => res.status(500).json(ApiErrors.internalServerError()));
+                res.status(200).json({message: "the user has been deleted."});
             })
             .catch(() => {res.status(401).json(ApiErrors.notAuthorised())});
     };
