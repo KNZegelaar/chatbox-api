@@ -3,6 +3,11 @@ const router = express.Router();
 const apiErrors = require("../errorMessages/apiErrors.js");
 const repo = require('../repositories/messageRepo');
 
+router.get('/:chatId', (req, res) => {
+   const chatId = req.params.chatId;
+   repo.readMessage(chatId, res);
+});
+
 router.post('/:chatId', (req, res) => {
     const chatId = req.params.chatId;
     const body = req.body;
@@ -15,6 +20,7 @@ router.post('/:chatId', (req, res) => {
 
     const content = body.content;
 
+    console.log(content);
     repo.createMessage(req.user.username, chatId, content, res);
 });
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const auth = require('../authentication/authentication');
+const auth = require('../authentication/authentication.js');
 const apiErrors = require("../errorMessages/apiErrors.js");
 const Isemail = require('isemail');
 const repo = require('../repositories/userRepo');
@@ -9,8 +9,10 @@ router.all(new RegExp("^(?!\/login$|\/register$).*"), (request, response, next) 
     const token = request.header('X-Access-Token');
     auth.decodeToken(token, (error, payload) => {
         if (error) {
-            response.status((error.status || 401)).json(apiErrors.notAuthorised)
+            console.log(error);
+            response.status((error.status || 401)).json(apiErrors.notAuthorised())
         } else {
+            console.log(payload.sub);
             request.user = {username: payload.sub};
             next();
         }
