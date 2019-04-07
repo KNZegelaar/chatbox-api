@@ -37,9 +37,11 @@ class MessageRepository {
             .catch(() => res.status(500).json(ApiErrors.internalServerError()));
     }
 
-    //TODO: write UPDATE
-
-    //TODO: write DELETE
+    static updateMessage(username, messageId, content, res) {
+        Message.update({_id:messageId}, {content})
+            .then(() => res.status(200).json("The message has successfully been updated"))
+            .catch(() => res.status(500).json(ApiErrors.internalServerError()));
+    }
 }
 
 module.exports = MessageRepository;

@@ -20,7 +20,6 @@ router.post('/:chatId', (req, res) => {
 
     const content = body.content;
 
-    console.log(content);
     repo.createMessage(req.user.username, chatId, content, res);
 });
 
@@ -30,21 +29,19 @@ router.delete('/:messageId', (req, res) => {
     repo.deleteMessage(messageId, res);
 });
 
-router.put('/:chatId', (req, res) => {
-    const chatId = req.params.chatId;
+router.put('/:messageId', (req, res) => {
+    const messageId = req.params.messageId;
     const body = req.body;
 
-    if (!CheckObjects.isValidChat(body)) {
+    if (!CheckObjects.isValidMessage(body)) {
         const error = apiErrors.wrongRequestBodyProperties;
         res.status(error.code).json(error);
         return;
     }
 
-    const title = body.title;
-    const description = body.description;
+    const content = body.content;
 
-
-    repo.updateChat(chatId, title, description, res);
+    repo.updateMessage(req.user.username, messageId, content, res);
 });
 
 class CheckObjects {
