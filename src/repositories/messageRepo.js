@@ -31,6 +31,12 @@ class MessageRepository {
             })
     }
 
+    static deleteMessage(messageId, res){
+        Message.update({_id:messageId}, {content: "This message has been deleted"})
+            .then(() => res.status(200).json("The message has successfully been deleted"))
+            .catch(() => res.status(500).json(ApiErrors.internalServerError()));
+    }
+
     //TODO: write UPDATE
 
     //TODO: write DELETE
