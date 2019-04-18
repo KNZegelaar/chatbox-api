@@ -83,4 +83,13 @@ describe('Message', () => {
             })
     });
 
+
+    //TODO: should be able to edit a existing message
+    //TODO: should not be able to edit a message that does not exist
+    //TODO: should not be able to edit a message when no content is given in the body
+
+    //TODO: should be able to delete a message
+    //TODO: should not be able to delete a message that does not exist yet
+
+
 });

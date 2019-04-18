@@ -125,4 +125,8 @@ describe('Chat', () => {
        done();
     });
 
+
+    // TODO: should be able to update an existing chat
+    // TODO: should not be able to update a non existing chat
+    // TODO: should not be able to update a chat when neither a title or description is given in the body
 });
