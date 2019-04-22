@@ -7,7 +7,6 @@ const assert = require('assert');
 chai.should();
 chai.use(chaiHttp);
 
-//TODO: write tests for DELETE and UPDATE Chat
 
 describe('Chat', () => {
     let token = '';
@@ -95,20 +94,9 @@ describe('Chat', () => {
 
     //READ
 
-    it('should return an error on GET request', (done)=> {
+    it('should return an array of chats on GET request', (done)=> {
         chai.request(index)
             .get('/api/chat')
-            .set('X-Access-Token', this.token)
-            .end((err, res) => {
-                token = res.body.token;
-                res.should.have.status(404);
-                done();
-            });
-    });
-
-    it('should return an array of chats on GET /all request', (done)=> {
-        chai.request(index)
-            .get('/api/chat/all')
             .set('X-Access-Token', this.token)
             .end((err, res) => {
                 token = res.body.token;
@@ -119,14 +107,73 @@ describe('Chat', () => {
             });
     });
 
+    it('should return an error of chats on GET /all request', (done)=> {
+        chai.request(index)
+            .get('/api/chat/all')
+            .set('X-Access-Token', this.token)
+            .end((err, res) => {
+                token = res.body.token;
+                res.should.have.status(500);
+                done();
+            });
+    });
+
     //UPDATE
 
     it('should update an chat', (done)=>{
-       done();
+        Chat.findOne({title: "Test Chat"})
+            .then((chat)=>{
+                chai.request(index)
+                    .put('/api/chat/' + chat._id)
+                    .set('X-Access-Token', this.token)
+                    .send({
+                        title: "Test Chat",
+                        description: "This is a updated chat created in the test folder"
+                    })
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.body.should.have.property('message', 'The chat has successfully been updated');
+
+                        Chat.findOne({title: "Test Chat"})
+                            .then((chat2)=> {
+                                assert(chat2.description === "This is a updated chat created in the test folder");
+                                done();
+                            })
+                    });
+            })
     });
 
+    it('should not be able to update an chat when no title is provided', (done)=>{
+        Chat.findOne({title: "Test Chat"})
+            .then((chat)=>{
+                chai.request(index)
+                    .put('/api/chat/' + chat._id)
+                    .set('X-Access-Token', this.token)
+                    .send({
+                        description: "This is a updated chat created in the test folder"
+                    })
+                    .end((err, res) => {
+                        res.should.have.status(412);
+                        res.body.should.have.property('message', 'One or more properties in the request body are missing or are invalid.');
+                        done();
+                    });
+            })
+    });
 
-    // TODO: should be able to update an existing chat
-    // TODO: should not be able to update a non existing chat
-    // TODO: should not be able to update a chat when neither a title or description is given in the body
+    it('should not be able to update an chat when no title is provided', (done)=>{
+        Chat.findOne({title: "Test Chat"})
+            .then((chat)=>{
+                chai.request(index)
+                    .put('/api/chat/' + chat._id)
+                    .set('X-Access-Token', this.token)
+                    .send({
+                        title: "Test Chat"
+                    })
+                    .end((err, res) => {
+                        res.should.have.status(412);
+                        res.body.should.have.property('message', 'One or more properties in the request body are missing or are invalid.');
+                        done();
+                    });
+            })
+    });
 });

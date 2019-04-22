@@ -59,7 +59,6 @@ class CheckObjects {
             object && typeof object == "object" &&
             object.description && typeof object.description == "string" &&
             object.title && typeof object.title == "string";
-        console.log(`Is chat valid: ${tmp == undefined ? false : tmp}`);
         return tmp == undefined ? false : tmp;
     }
 }

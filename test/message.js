@@ -63,7 +63,7 @@ describe('Message', () => {
                     })
                     .end((err, res) => {
                         res.should.have.status(200);
-                        res.body.should.have.property('message', 'message created and saved to the chat');
+                        res.body.should.have.property('message', 'The message has successfully been created');
                         done();
                     });
             })
@@ -83,13 +83,60 @@ describe('Message', () => {
             })
     });
 
+    it('should be able to edit a existing message', (done) => {
+        Message.findOne({content: "This is a message created in the test folder"})
+            .then((message)=>{
+                chai.request(index)
+                    .put('/api/message/' + message._id)
+                    .set('X-Access-Token', this.token)
+                    .send({
+                        content: "This is a message edited in the test folder"
+                    })
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.body.should.have.property('message', 'The message has successfully been updated');
 
-    //TODO: should be able to edit a existing message
-    //TODO: should not be able to edit a message that does not exist
-    //TODO: should not be able to edit a message when no content is given in the body
+                        Message.findOne({_id: message._id})
+                        .then((message)=>{
+                            assert(message.content === "This is a message edited in the test folder");
+                            assert(message.content !== "This is a message created in the test folder");
+                            done();
+                        });
+                    });
+            })
+    });
 
-    //TODO: should be able to delete a message
-    //TODO: should not be able to delete a message that does not exist yet
+    it('should not be able to edit a message when no content is given in the body', (done) => {
+        Message.findOne({content: "This is a message edited in the test folder"})
+            .then((message)=>{
+                chai.request(index)
+                    .put('/api/message/' + message._id)
+                    .set('X-Access-Token', this.token)
+                    .end((err, res) => {
+                        res.should.have.status(412);
+                        res.body.should.have.property('message', 'One or more properties in the request body are missing or are invalid.');
+                        done();
+                    });
+            })
+    });
 
+    it('should be able to delete a message', (done) => {
+        Message.findOne({content: "This is a message edited in the test folder"})
+            .then((message)=>{
+                chai.request(index)
+                    .delete('/api/message/' + message._id)
+                    .set('X-Access-Token', this.token)
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.body.should.have.property('message', 'The message has successfully been deleted');
+
+                        Message.findOne({_id: message._id})
+                            .then((message2)=> {
+                                assert(message2.content === "This message has been deleted");
+                                done();
+                            })
+                    });
+            })
+    });
 
 });

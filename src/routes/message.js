@@ -49,7 +49,6 @@ class CheckObjects {
         const tmp =
             object && typeof object == "object" &&
             object.content && typeof object.content == "string";
-        console.log(`Is message valid: ${tmp == undefined ? false : tmp}`);
         return tmp == undefined ? false : tmp;
     }
 }

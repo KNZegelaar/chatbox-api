@@ -20,7 +20,6 @@ class MessageRepository {
                 Chat.findOne({_id: chatId})
                     .then((chat) => {
                         const message = new Message({content, user, chat});
-                        console.log(message);
 
                         message.save()
                             .then(() => res.status(200).json({message: "The message has successfully been created"}))
@@ -33,13 +32,13 @@ class MessageRepository {
 
     static deleteMessage(messageId, res){
         Message.update({_id:messageId}, {content: "This message has been deleted"})
-            .then(() => res.status(200).json("The message has successfully been deleted"))
+            .then(() => res.status(200).json({message: "The message has successfully been deleted"}))
             .catch(() => res.status(500).json(ApiErrors.internalServerError()));
     }
 
     static updateMessage(username, messageId, content, res) {
         Message.update({_id:messageId}, {content})
-            .then(() => res.status(200).json("The message has successfully been updated"))
+            .then(() => res.status(200).json({message: "The message has successfully been updated"}))
             .catch(() => res.status(500).json(ApiErrors.internalServerError()));
     }
 }

@@ -12,7 +12,6 @@ router.all(new RegExp("^(?!\/login$|\/register$).*"), (request, response, next) 
             console.log(error);
             response.status((error.status || 401)).json(apiErrors.notAuthorised())
         } else {
-            console.log(payload.sub);
             request.user = {username: payload.sub};
             next();
         }
@@ -88,7 +87,6 @@ class CheckObjects {
             object && typeof object == "object" &&
             object.username && typeof object.username == "string" &&
             object.password && typeof object.password == "string";
-        console.log(`Is login valid: ${tmp == undefined ? false : tmp}`);
         return tmp == undefined ? false : tmp;
     }
 
@@ -99,7 +97,6 @@ class CheckObjects {
             object.username && typeof object.username == "string" && object.username.length >= 2 &&
             object.email && typeof object.email == "string" && Isemail.validate(object.email) &&
             object.password && typeof object.password == "string";
-        console.log(`Is registration valid: ${tmp == undefined ? false : tmp}`);
         return tmp == undefined ? false : tmp;
     }
 
@@ -108,7 +105,6 @@ class CheckObjects {
             object && typeof object == "object" &&
             object.password && typeof object.password == "string" &&
             object.newPassword && typeof object.newPassword == "string";
-        console.log(`Is password change valid: ${tmp == undefined ? false : tmp}`);
         return tmp == undefined ? false : tmp;
     }
 
@@ -116,7 +112,6 @@ class CheckObjects {
         const tmp =
             object && typeof object == "object" &&
             object.password && typeof object.password == "string";
-        console.log(`Is account delete valid: ${tmp == undefined ? false : tmp}`);
         return tmp == undefined ? false : tmp;
     }
 }

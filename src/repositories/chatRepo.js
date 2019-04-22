@@ -32,7 +32,7 @@ class ChatRepository {
 
     static updateChat(_id, title, description, res){
         Chat.update({_id}, {title, description})
-            .then(() => res.status(200).json("The chat has successfully been updated"))
+            .then(() => res.status(200).json({message: "The chat has successfully been updated"}))
             .catch(() => res.status(500).json(ApiErrors.internalServerError()));
     }
 
