@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3fda08f-e734-4476-9751-817c1d3990a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repositories/chatRepo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/repositories/chatRepo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repositories/messageRepo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/repositories/messageRepo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/authentication.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/authentication.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/chat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/message.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/chat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/message.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -105,8 +98,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/chat.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="177" column="7" selection-start-line="177" selection-start-column="7" selection-end-line="177" selection-end-column="7" />
+            <state relative-caret-position="195">
+              <caret line="109" column="30" selection-start-line="109" selection-start-column="30" selection-end-line="109" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -227,12 +220,12 @@
       <workItem from="1548166503484" duration="9496000" />
       <workItem from="1554659303818" duration="1749000" />
       <workItem from="1555612947443" duration="1747000" />
-      <workItem from="1555936802241" duration="2319000" />
+      <workItem from="1555936802241" duration="3084000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19341000" />
+    <option name="totallyTimeSpent" value="20106000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -247,7 +240,7 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12295082" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12295082" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="npm" order="3" side_tool="true" />
@@ -260,7 +253,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32829374" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32936078" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32829374" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32829374" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -384,8 +377,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/chat.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="177" column="7" selection-start-line="177" selection-start-column="7" selection-end-line="177" selection-end-column="7" />
+        <state relative-caret-position="195">
+          <caret line="109" column="30" selection-start-line="109" selection-start-column="30" selection-end-line="109" selection-end-column="30" />
         </state>
       </provider>
     </entry>

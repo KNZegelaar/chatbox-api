@@ -107,7 +107,7 @@ describe('Chat', () => {
             });
     });
 
-    it('should return an error of chats on GET /all request', (done)=> {
+    it('should return an error on GET /all request', (done)=> {
         chai.request(index)
             .get('/api/chat/all')
             .set('X-Access-Token', this.token)
